@@ -1,240 +1,93 @@
-import { View, Text, Image, Pressable, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, Image, SafeAreaView, TextInput, TouchableOpacity, Pressable } from 'react-native'
 import React, { useState } from 'react'
-import { SafeAreaView } from "react-native-safe-area-context";
+import {LinearGradient} from "expo-linear-gradient";
 import COLORS from '../constants/colors';
 import { Ionicons } from "@expo/vector-icons";
+import styles from '../constants/styles.js';
+import {StatusBar} from 'expo-status-bar';
+import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
+
 
 const Signup = ({ navigation }) => {
-    const [isPasswordShown, setIsPasswordShown] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-            <View style={{ flex: 1, marginHorizontal: 22 }}>
-                <View style={{ marginVertical: 22 }}>
-                    <Text style={{
-                        fontSize: 22,
-                        fontWeight: 'bold',
-                        marginVertical: 12,
-                        color: COLORS.black,
-                        alignItems: 'center',
-                    }}>
+        <View className="bg-white h-full w-full">
+          <StatusBar style="light" />
+          <Image className="h-full w-full absolute" source={require('../assets/background.png')} />
+    
+          {/* lights */}
+          <View className="flex-row justify-around w-full absolute">
+            <Animated.Image 
+                entering={FadeInUp.delay(200).duration(1000).springify()} 
+                source={require('../assets/light.png')} 
+                className="h-[225] w-[90]"
+            />
+            <Animated.Image 
+                entering={FadeInUp.delay(400).duration(1000).springify()} 
+                source={require('../assets/light.png')} 
+                className="h-[160] w-[65] opacity-75" 
+            />
+          </View>
+    
+          {/* title and form */}
+          <View  className="h-full w-full flex justify-around pt-48">
+            
+            {/* title */}
+            <View className="flex items-center">
+                <Animated.Text 
+                    entering={FadeInUp.duration(1000).springify()} 
+                    className="text-white font-bold tracking-wider text-5xl">
                         Sign Up
-                    </Text>
-                </View>
-
-                <View style={{ marginBottom: 12 }}>
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: 400,
-                        marginVertical: 8
-                    }}>Email address</Text>
-
-                    <View style={{
-                        width: "100%",
-                        height: 48,
-                        borderColor: COLORS.black,
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        paddingLeft: 22
-                    }}>
-                        <TextInput
-                            placeholder='Enter your email address'
-                            placeholderTextColor={COLORS.black}
-                            keyboardType='email-address'
-                            style={{
-                                width: "100%"
-                            }}
-                        />
-                    </View>
-                </View>
-
-                <View style={{ marginBottom: 12 }}>
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: 400,
-                        marginVertical: 8
-                    }}>First Name</Text>
-
-                    <View style={{
-                        width: "50%",
-                        height: 48,
-                        borderColor: COLORS.black,
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        alignItems: "flex-start",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        paddingLeft: 22
-                    }}>
-                        <TextInput
-                            placeholder='+91'
-                            placeholderTextColor={COLORS.black}
-                            keyboardType='numeric'
-                            style={{
-                                width: "12%",
-                                borderRightWidth: 1,
-                                borderLeftColor: COLORS.grey,
-                                height: "100%"
-                            }}
-                        />
-
-                        <TextInput
-                            placeholder='Enter your phone number'
-                            placeholderTextColor={COLORS.black}
-                            keyboardType='numeric'
-                            style={{
-                                width: "80%"
-                            }}
-                        />
-                    </View>
-                </View>
-
-                <View style={{ marginBottom: 12 }}>
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: 400,
-                        marginVertical: 8
-                    }}>Password</Text>
-
-                    <View style={{
-                        width: "100%",
-                        height: 48,
-                        borderColor: COLORS.black,
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        paddingLeft: 22
-                    }}>
-                        <TextInput
-                            placeholder='Enter your password'
-                            placeholderTextColor={COLORS.black}
-                            secureTextEntry={isPasswordShown}
-                            style={{
-                                width: "100%"
-                            }}
-                        />
-
-                        <TouchableOpacity
-                            onPress={() => setIsPasswordShown(!isPasswordShown)}
-                            style={{
-                                position: "absolute",
-                                right: 12
-                            }}
-                        >
-                            {
-                                isPasswordShown == true ? (
-                                    <Ionicons name="eye-off" size={24} color={COLORS.black} />
-                                ) : (
-                                    <Ionicons name="eye" size={24} color={COLORS.black} />
-                                )
-                            }
-
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.grey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                    <Text style={{ fontSize: 14 }}>Or Sign up with</Text>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.grey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                </View>
-
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}>
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.grey,
-                            marginRight: 4,
-                            borderRadius: 10
-                        }}
-                    >
-                        <Image
-                            source={require("../assets/facebook.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Facebook</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.grey,
-                            marginRight: 4,
-                            borderRadius: 10
-                        }}
-                    >
-                        <Image
-                            source={require("../assets/google.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Google</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    marginVertical: 22
-                }}>
-                    <Text style={{ fontSize: 16, color: COLORS.black }}>Already have an account</Text>
-                    <Pressable
-                        onPress={() => navigation.navigate("Login")}
-                    >
-                        <Text style={{
-                            fontSize: 16,
-                            color: COLORS.primary,
-                            fontWeight: "bold",
-                            marginLeft: 6
-                        }}>Login</Text>
-                    </Pressable>
-                </View>
+                </Animated.Text>
             </View>
-        </SafeAreaView>
-    )
+    
+            {/* form */}
+            <View className="flex items-center mx-5 space-y-4">
+                <Animated.View 
+                    entering={FadeInDown.duration(1000).springify()} 
+                    className="bg-black/5 p-5 rounded-2xl w-full">
+                    <TextInput
+                        placeholder="Username"
+                        placeholderTextColor={'gray'}
+                    />
+                </Animated.View>
+                <Animated.View 
+                    entering={FadeInDown.delay(200).duration(1000).springify()} 
+                    className="bg-black/5 p-5 rounded-2xl w-full">
+                    <TextInput
+                        placeholder="Email"
+                        placeholderTextColor={'gray'}
+                    />
+                </Animated.View>
+                <Animated.View 
+                    entering={FadeInDown.delay(400).duration(1000).springify()} 
+                    className="bg-black/5 p-5 rounded-2xl w-full mb-3">
+                    <TextInput
+                        placeholder="Password"
+                        placeholderTextColor={'gray'}
+                        secureTextEntry
+                    />
+                </Animated.View>
+    
+                <Animated.View className="w-full" entering={FadeInDown.delay(600).duration(1000).springify()}>
+                    <TouchableOpacity className="w-full bg-sky-400 p-3 rounded-2xl mb-3">
+                        <Text className="text-xl font-bold text-white text-center">SignUp</Text>
+                    </TouchableOpacity>
+                </Animated.View>
+    
+                <Animated.View 
+                    entering={FadeInDown.delay(800).duration(1000).springify()} 
+                    className="flex-row justify-center">
+    
+                    <Text>Already have an account? </Text>
+                    <TouchableOpacity onPress={()=> navigation.push('Login')}>
+                        <Text className="text-sky-600">Login</Text>
+                    </TouchableOpacity>
+    
+                </Animated.View>
+            </View>
+          </View>
+        </View>
+      )
 }
 
 export default Signup

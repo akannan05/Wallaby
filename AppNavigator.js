@@ -4,6 +4,7 @@ import  WelcomeScreen2  from "./screens/WelcomeScreen2";
 import  WelcomeScreen3  from "./screens/WelcomeScreen3";
 import  WelcomeScreen4  from "./screens/WelcomeScreen4";
 import Signup from "./screens/Signup";
+import Login from "./screens/Login";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const AppNavigator = () => {
             <Stack.Screen name="Welcome3"component={WelcomeScreen3} />
             <Stack.Screen name="Welcome4"component={WelcomeScreen4} />
             <Stack.Screen name="Signup"component={Signup} />
+            <Stack.Screen name="Login"component={Login} />
         </Stack.Navigator>
     )
 }
